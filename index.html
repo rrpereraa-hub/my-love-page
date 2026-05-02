@@ -3,10 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>For You 💖</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Quicksand:wght@300;400;500&display=swap" rel="stylesheet">
+<title>For You</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
 
 <style>
 * {
@@ -16,262 +14,623 @@
 }
 
 body {
-    font-family: 'Quicksand', sans-serif;
-    background: radial-gradient(circle at top, #1a1a2e, #0f0f1a);
+    font-family: 'Montserrat', sans-serif;
+    background: linear-gradient(rgba(20, 20, 40, 0.85), rgba(30, 30, 50, 0.9)), 
+                url('https://images.unsplash.com/photo-1474511320723-9a56873867b5?w=1600&q=80') center/cover fixed;
+    color: #e0e0e0;
     overflow-x: hidden;
-    color: white;
+    min-height: 100vh;
 }
 
-/* soft glow overlay */
-body::before {
-    content: "";
+/* Particle Background */
+#particles {
     position: fixed;
-    inset: 0;
-    background: radial-gradient(circle at 20% 20%, rgba(255,182,193,0.15), transparent 40%),
-                radial-gradient(circle at 80% 30%, rgba(173,216,230,0.12), transparent 40%),
-                radial-gradient(circle at 50% 80%, rgba(144,238,144,0.1), transparent 50%);
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1;
     pointer-events: none;
 }
 
-/* LANDING */
+.particle {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background: rgba(255, 255, 255, 0.6);
+    border-radius: 50%;
+    animation: float-particle 20s infinite;
+}
+
+@keyframes float-particle {
+    0%, 100% {
+        transform: translateY(0) translateX(0);
+        opacity: 0;
+    }
+    10% {
+        opacity: 1;
+    }
+    90% {
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-100vh) translateX(100px);
+        opacity: 0;
+    }
+}
+
+/* Landing Page */
 #landing {
     height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    text-align: center;
+    position: relative;
+    z-index: 10;
 }
 
 #landing h1 {
-    font-family: 'Playfair Display', serif;
-    font-size: 3.5rem;
-    letter-spacing: 6px;
-    background: linear-gradient(90deg, #ffd6e0, #d6f5ff, #d6ffe0);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    animation: fade 2s ease;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 4em;
+    font-weight: 300;
+    color: #fff;
+    letter-spacing: 8px;
+    margin-bottom: 60px;
+    text-shadow: 0 0 30px rgba(255,255,255,0.3);
+    animation: fadeInTitle 2s ease;
 }
 
-@keyframes fade {
-    from {opacity: 0; transform: translateY(-10px);}
-    to {opacity: 1; transform: translateY(0);}
+@keyframes fadeInTitle {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .enter-btn {
-    margin-top: 25px;
-    padding: 14px 40px;
-    border-radius: 50px;
-    border: 1px solid rgba(255,255,255,0.4);
-    background: rgba(255,255,255,0.05);
-    color: white;
-    backdrop-filter: blur(10px);
+    padding: 15px 60px;
+    background: transparent;
+    border: 2px solid rgba(255, 255, 255, 0.6);
+    color: #fff;
+    font-size: 14px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
     cursor: pointer;
-    transition: 0.3s;
+    transition: all 0.4s ease;
+    font-weight: 300;
+    position: relative;
+    overflow: hidden;
+}
+
+.enter-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.1);
+    transition: left 0.4s ease;
+    z-index: -1;
+}
+
+.enter-btn:hover::before {
+    left: 0;
 }
 
 .enter-btn:hover {
-    transform: scale(1.05);
-    border-color: white;
+    border-color: #fff;
+    box-shadow: 0 0 20px rgba(255,255,255,0.3);
 }
 
-/* MAIN */
+/* Main Content */
 #main {
     display: none;
-    padding: 30px 20px;
+    padding: 60px 20px;
+    position: relative;
+    z-index: 10;
+    animation: fadeIn 1.5s ease;
 }
 
-/* fox */
-.fox {
-    width: 130px;
-    filter: drop-shadow(0 0 20px rgba(255,255,255,0.2));
-    animation: float 4s ease-in-out infinite;
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
 }
 
-@keyframes float {
-    0%,100%{transform:translateY(0);}
-    50%{transform:translateY(-12px);}
-}
-
-/* title */
-.title {
-    font-family: 'Playfair Display', serif;
-    font-size: 2.5rem;
-    margin: 20px 0;
-    opacity: 0.9;
-}
-
-/* message card */
-.card {
-    max-width: 600px;
-    margin: auto;
-    padding: 25px;
-    border-radius: 20px;
-    background: rgba(255,255,255,0.06);
-    backdrop-filter: blur(18px);
-    border: 1px solid rgba(255,255,255,0.1);
-    line-height: 1.9;
-    font-size: 1rem;
-}
-
-/* hearts */
-.heart {
-    position: absolute;
-    font-size: 26px;
+/* Music Button */
+.music-btn {
+    position: fixed;
+    top: 40px;
+    right: 40px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    background: rgba(20, 20, 40, 0.6);
+    backdrop-filter: blur(10px);
+    color: #fff;
+    font-size: 20px;
     cursor: pointer;
-    transition: 0.3s;
+    transition: all 0.3s ease;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.heart:hover {
-    transform: scale(1.3);
+.music-btn:hover {
+    border-color: #fff;
+    box-shadow: 0 0 20px rgba(255,255,255,0.3);
+    transform: scale(1.05);
 }
 
-/* hidden msg */
-#secret {
+/* Fox Silhouette */
+.fox-silhouette {
+    position: fixed;
+    bottom: 0;
+    right: 10%;
+    width: 400px;
+    opacity: 0.15;
+    z-index: 2;
+    pointer-events: none;
+}
+
+/* Content Container */
+.content-wrapper {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+/* Typed Text */
+#typedText {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3em;
+    font-weight: 300;
+    color: #fff;
+    text-align: center;
+    margin: 40px 0 60px;
+    letter-spacing: 2px;
+    min-height: 80px;
+}
+
+.cursor {
+    opacity: 1;
+    animation: blink 1s infinite;
+}
+
+@keyframes blink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
+}
+
+/* Message Box */
+.message-box {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 60px;
+    border-radius: 2px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+    animation: slideUp 1.5s ease;
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.message-box p {
+    font-size: 1.1em;
+    line-height: 2;
+    color: rgba(255, 255, 255, 0.85);
+    margin: 25px 0;
+    font-weight: 300;
+    letter-spacing: 0.5px;
+}
+
+.message-box .signature {
+    display: block;
+    margin-top: 50px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4em;
+    color: rgba(255, 255, 255, 0.9);
+    font-style: italic;
+    letter-spacing: 1px;
+}
+
+/* Floating Elements */
+.floating-symbol {
+    position: fixed;
+    font-size: 30px;
+    opacity: 0;
+    animation: floatUp 15s infinite;
+    z-index: 5;
+    pointer-events: none;
+}
+
+@keyframes floatUp {
+    0% {
+        transform: translateY(100vh) rotate(0deg);
+        opacity: 0;
+    }
+    10% {
+        opacity: 0.3;
+    }
+    90% {
+        opacity: 0.3;
+    }
+    100% {
+        transform: translateY(-100vh) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+/* Interactive Hearts */
+.heart-interactive {
+    position: fixed;
+    font-size: 35px;
+    cursor: pointer;
+    z-index: 100;
+    transition: all 0.3s ease;
+    filter: grayscale(0.3) brightness(0.9);
+}
+
+.heart-interactive:hover {
+    transform: scale(1.2);
+    filter: grayscale(0) brightness(1.2);
+}
+
+.heart-interactive.collected {
+    animation: collect 0.6s ease forwards;
+}
+
+@keyframes collect {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.5) rotate(180deg);
+    }
+    100% {
+        transform: scale(0) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+/* Heart Counter */
+.heart-counter {
+    position: fixed;
+    top: 40px;
+    left: 40px;
+    font-size: 1.1em;
+    color: rgba(255, 255, 255, 0.8);
+    background: rgba(20, 20, 40, 0.6);
+    backdrop-filter: blur(10px);
+    padding: 15px 25px;
+    border-radius: 30px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    z-index: 1000;
+    font-weight: 300;
+    letter-spacing: 1px;
+}
+
+/* Instructions */
+.instructions {
+    text-align: center;
+    font-size: 1em;
+    color: rgba(255, 255, 255, 0.6);
+    margin: 40px 0;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: 300;
+}
+
+/* Secret Message */
+#secretMsg {
     display: none;
-    margin-top: 25px;
-    padding: 20px;
-    border-radius: 15px;
-    background: rgba(255,182,193,0.15);
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 40px;
+    border-radius: 2px;
+    margin: 50px auto;
+    max-width: 700px;
+    text-align: center;
+    animation: reveal 1s ease;
 }
 
-/* butterflies */
+@keyframes reveal {
+    0% {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+#secretMsg p {
+    font-size: 1.3em;
+    color: rgba(255, 255, 255, 0.9);
+    line-height: 1.8;
+    font-weight: 300;
+    letter-spacing: 1px;
+}
+
+/* Butterflies */
 .butterfly {
     position: fixed;
-    width: 35px;
-    opacity: 0.6;
-    animation: fly 18s linear infinite;
+    width: 40px;
+    height: 40px;
+    z-index: 10;
+    opacity: 0.4;
+    animation: butterflyFlight 20s linear infinite;
+    pointer-events: none;
 }
 
-@keyframes fly {
-    from {transform: translateX(-10vw);}
-    to {transform: translateX(110vw);}
+@keyframes butterflyFlight {
+    0% {
+        transform: translateX(-10vw) translateY(0) scale(1);
+    }
+    25% {
+        transform: translateX(30vw) translateY(-30vh) scale(1.2);
+    }
+    50% {
+        transform: translateX(60vw) translateY(20vh) scale(0.9);
+    }
+    75% {
+        transform: translateX(90vw) translateY(-15vh) scale(1.1);
+    }
+    100% {
+        transform: translateX(110vw) translateY(0) scale(1);
+    }
 }
 
-/* particles */
-.particle {
-    position: fixed;
-    width: 3px;
-    height: 3px;
-    background: white;
-    border-radius: 50%;
-    opacity: 0.3;
-    animation: rise 12s linear infinite;
-}
-
-@keyframes rise {
-    from {transform: translateY(100vh);}
-    to {transform: translateY(-10vh);}
-}
-
-/* music button */
-.music {
-    position: fixed;
-    top: 15px;
-    right: 15px;
-    background: rgba(255,255,255,0.08);
-    border: 1px solid rgba(255,255,255,0.2);
-    padding: 10px 14px;
-    border-radius: 50%;
-    cursor: pointer;
+/* Responsive */
+@media (max-width: 768px) {
+    #landing h1 {
+        font-size: 2.5em;
+        letter-spacing: 4px;
+    }
+    
+    #typedText {
+        font-size: 2em;
+    }
+    
+    .message-box {
+        padding: 40px 30px;
+    }
+    
+    .fox-silhouette {
+        width: 250px;
+        right: 5%;
+    }
+    
+    .music-btn {
+        top: 20px;
+        right: 20px;
+    }
+    
+    .heart-counter {
+        top: 20px;
+        left: 20px;
+        font-size: 0.9em;
+        padding: 10px 20px;
+    }
 }
 </style>
 </head>
 
 <body>
 
-<audio id="song" loop>
-  <source src="song.mp3">
+<!-- Particles Background -->
+<div id="particles"></div>
+
+<!-- Audio -->
+<audio id="music" loop>
+  <source src="song.mp3" type="audio/mpeg">
 </audio>
 
-<!-- LANDING -->
+<!-- Fox Silhouette -->
+<svg class="fox-silhouette" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+    <path d="M200,100 L160,60 L140,80 L150,100 Q130,120 130,150 Q130,200 150,230 L160,250 Q180,280 200,290 Q220,280 240,250 L250,230 Q270,200 270,150 Q270,120 250,100 L260,80 L240,60 L200,100 Z M200,150 Q190,155 185,165 Q180,175 180,185 Q180,200 190,210 Q200,220 210,210 Q220,200 220,185 Q220,175 215,165 Q210,155 200,150 Z" 
+          fill="rgba(255,255,255,0.15)" 
+          stroke="rgba(255,255,255,0.1)" 
+          stroke-width="2"/>
+    <circle cx="175" cy="180" r="5" fill="rgba(255,255,255,0.2)"/>
+    <circle cx="225" cy="180" r="5" fill="rgba(255,255,255,0.2)"/>
+    <path d="M190,200 Q200,205 210,200" stroke="rgba(255,255,255,0.15)" stroke-width="2" fill="none"/>
+</svg>
+
+<!-- Landing Page -->
 <div id="landing">
     <h1>FOR YOU</h1>
-    <button class="enter-btn" onclick="start()">Enter 💖</button>
+    <button class="enter-btn" onclick="start()">ENTER</button>
 </div>
 
-<!-- MAIN -->
+<!-- Main Content -->
 <div id="main">
+    <button class="music-btn" onclick="toggleMusic()" id="musicBtn">♪</button>
+    
+    <div class="heart-counter">
+        <span id="heartCount">0</span> / 5
+    </div>
 
-<button class="music" onclick="document.getElementById('song').play()">🎵</button>
+    <div class="content-wrapper">
+        <h2 id="typedText"></h2>
 
-<img class="fox" src="https://cdn-icons-png.flaticon.com/512/616/616554.png">
+        <div class="message-box">
+            <p>Thank you for being mine.</p>
+            
+            <p>I'll be rooting for you in every lifetime. I'm so proud of you, chuti bba.</p>
 
-<div class="title">My Love</div>
+            <p>You are my safe place, my happiness. I'd find you in every universe.</p>
 
-<div class="card">
-    Thank you for being mine.. 💖<br><br>
-    I'll be rooting for you in every lifetime..<br>
-    I'm so proud of you, always.<br><br>
-    You feel like home in every universe 🦋<br><br>
-    I love you endlessly.
-</div>
+            <p>I love you.</p>
 
-<div id="secret">
-    lets go bingchun soon and play mortal combat 💕
-</div>
+            <span class="signature">— from your jandi</span>
+        </div>
 
+        <p class="instructions">Find the hearts</p>
+        
+        <div id="secretMsg">
+            <p>Let's go bingchun soon and play mortal kombat 💕</p>
+        </div>
+    </div>
 </div>
 
 <script>
+let musicPlaying = false;
 
-function start(){
-    document.getElementById("landing").style.display="none";
-    document.getElementById("main").style.display="block";
-
+function start() {
+    document.getElementById("landing").style.display = "none";
+    document.getElementById("main").style.display = "block";
+    
+    typing();
+    createParticles();
+    createFloatingSymbols();
+    createButterflies();
     spawnHearts();
-    butterflies();
-    particles();
 }
 
-/* hearts game */
-let count=0;
-
-function spawnHearts(){
-    setInterval(()=>{
-        let h=document.createElement("div");
-        h.className="heart";
-        h.innerHTML="💖";
-        h.style.left=Math.random()*90+"vw";
-        h.style.top=Math.random()*80+"vh";
-
-        h.onclick=()=>{
-            h.remove();
-            count++;
-            if(count>=5){
-                document.getElementById("secret").style.display="block";
-            }
-        };
-
-        document.body.appendChild(h);
-
-        setTimeout(()=>h.remove(),5000);
-    },900);
-}
-
-/* butterflies */
-function butterflies(){
-    setInterval(()=>{
-        let b=document.createElement("img");
-        b.src="https://cdn-icons-png.flaticon.com/512/616/616490.png";
-        b.className="butterfly";
-        b.style.top=Math.random()*80+"vh";
-        document.body.appendChild(b);
-        setTimeout(()=>b.remove(),18000);
-    },3000);
-}
-
-/* particles */
-function particles(){
-    for(let i=0;i<25;i++){
-        let p=document.createElement("div");
-        p.className="particle";
-        p.style.left=Math.random()*100+"vw";
-        p.style.animationDuration=(8+Math.random()*5)+"s";
-        document.body.appendChild(p);
+function toggleMusic() {
+    const music = document.getElementById("music");
+    const btn = document.getElementById("musicBtn");
+    
+    if (musicPlaying) {
+        music.pause();
+        btn.innerHTML = "♪";
+        musicPlaying = false;
+    } else {
+        music.play().catch(e => console.log("Music autoplay blocked. Click to play."));
+        btn.innerHTML = "⏸";
+        musicPlaying = true;
     }
 }
 
+// Typing Effect
+let text = "My Love";
+let i = 0;
+function typing() {
+    if (i < text.length) {
+        document.getElementById("typedText").innerHTML += text.charAt(i);
+        i++;
+        setTimeout(typing, 200);
+    } else {
+        document.getElementById("typedText").innerHTML += '<span class="cursor">_</span>';
+    }
+}
+
+// Create Particle Background
+function createParticles() {
+    const particlesContainer = document.getElementById("particles");
+    for (let i = 0; i < 50; i++) {
+        let particle = document.createElement("div");
+        particle.className = "particle";
+        particle.style.left = Math.random() * 100 + "vw";
+        particle.style.animationDelay = Math.random() * 20 + "s";
+        particle.style.animationDuration = (15 + Math.random() * 10) + "s";
+        particlesContainer.appendChild(particle);
+    }
+}
+
+// Floating Symbols
+function createFloatingSymbols() {
+    const symbols = ["✦", "✧", "○", "◇", "△"];
+    setInterval(() => {
+        let symbol = document.createElement("div");
+        symbol.className = "floating-symbol";
+        symbol.innerHTML = symbols[Math.floor(Math.random() * symbols.length)];
+        symbol.style.left = Math.random() * 100 + "vw";
+        symbol.style.animationDelay = "0s";
+        symbol.style.fontSize = (20 + Math.random() * 20) + "px";
+        document.body.appendChild(symbol);
+        setTimeout(() => symbol.remove(), 15000);
+    }, 3000);
+}
+
+// Butterflies
+function createButterflies() {
+    setInterval(() => {
+        let butterfly = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+        butterfly.setAttribute("class", "butterfly");
+        butterfly.setAttribute("viewBox", "0 0 50 50");
+        butterfly.style.top = Math.random() * 80 + "vh";
+        
+        butterfly.innerHTML = `
+            <ellipse cx="15" cy="20" rx="12" ry="8" fill="rgba(255,255,255,0.3)">
+                <animate attributeName="ry" values="8;11;8" dur="0.6s" repeatCount="indefinite"/>
+            </ellipse>
+            <ellipse cx="35" cy="20" rx="12" ry="8" fill="rgba(255,255,255,0.3)">
+                <animate attributeName="ry" values="8;11;8" dur="0.6s" repeatCount="indefinite"/>
+            </ellipse>
+            <ellipse cx="15" cy="30" rx="10" ry="6" fill="rgba(255,255,255,0.2)">
+                <animate attributeName="ry" values="6;9;6" dur="0.6s" repeatCount="indefinite"/>
+            </ellipse>
+            <ellipse cx="35" cy="30" rx="10" ry="6" fill="rgba(255,255,255,0.2)">
+                <animate attributeName="ry" values="6;9;6" dur="0.6s" repeatCount="indefinite"/>
+            </ellipse>
+            <line x1="25" y1="15" x2="25" y2="35" stroke="rgba(255,255,255,0.4)" stroke-width="1"/>
+        `;
+        
+        document.body.appendChild(butterfly);
+        setTimeout(() => butterfly.remove(), 20000);
+    }, 4000);
+}
+
+// Hearts Game
+let heartCount = 0;
+function spawnHearts() {
+    setInterval(() => {
+        if (heartCount >= 5) return;
+        
+        let heart = document.createElement("div");
+        heart.className = "heart-interactive";
+        heart.innerHTML = "♡";
+        heart.style.left = Math.random() * 85 + "vw";
+        heart.style.top = Math.random() * 75 + "vh";
+        
+        heart.onclick = () => {
+            heart.classList.add("collected");
+            heartCount++;
+            document.getElementById("heartCount").textContent = heartCount;
+            
+            setTimeout(() => heart.remove(), 600);
+            
+            if (heartCount >= 5) {
+                setTimeout(() => {
+                    document.getElementById("secretMsg").style.display = "block";
+                    document.querySelector(".instructions").style.display = "none";
+                }, 500);
+            }
+        };
+        
+        document.body.appendChild(heart);
+        
+        setTimeout(() => {
+            if (!heart.classList.contains("collected")) {
+                heart.remove();
+            }
+        }, 5000);
+    }, 1500);
+}
 </script>
 
 </body>
