@@ -6,60 +6,141 @@
 
 <title>For You 💖</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Quicksand&family=Pacifico&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Quicksand:wght@300;400;500&display=swap" rel="stylesheet">
 
 <style>
-body {
+* {
     margin: 0;
-    font-family: 'Quicksand', sans-serif;
-    background: linear-gradient(135deg, #e6fff2, #ffe6f2, #e6f0ff);
-    overflow-x: hidden;
-    text-align: center;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-/* landing */
+body {
+    font-family: 'Quicksand', sans-serif;
+    background: radial-gradient(circle at top, #1a1a2e, #0f0f1a);
+    overflow-x: hidden;
+    color: white;
+}
+
+/* soft glow overlay */
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: radial-gradient(circle at 20% 20%, rgba(255,182,193,0.15), transparent 40%),
+                radial-gradient(circle at 80% 30%, rgba(173,216,230,0.12), transparent 40%),
+                radial-gradient(circle at 50% 80%, rgba(144,238,144,0.1), transparent 50%);
+    pointer-events: none;
+}
+
+/* LANDING */
 #landing {
     height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
+    text-align: center;
 }
 
-button {
-    padding: 12px 20px;
-    border-radius: 25px;
-    border: none;
-    background: #ff99cc;
+#landing h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 3.5rem;
+    letter-spacing: 6px;
+    background: linear-gradient(90deg, #ffd6e0, #d6f5ff, #d6ffe0);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: fade 2s ease;
+}
+
+@keyframes fade {
+    from {opacity: 0; transform: translateY(-10px);}
+    to {opacity: 1; transform: translateY(0);}
+}
+
+.enter-btn {
+    margin-top: 25px;
+    padding: 14px 40px;
+    border-radius: 50px;
+    border: 1px solid rgba(255,255,255,0.4);
+    background: rgba(255,255,255,0.05);
     color: white;
-    font-size: 16px;
+    backdrop-filter: blur(10px);
+    cursor: pointer;
+    transition: 0.3s;
 }
 
-/* main */
+.enter-btn:hover {
+    transform: scale(1.05);
+    border-color: white;
+}
+
+/* MAIN */
 #main {
     display: none;
-    padding: 20px;
-}
-
-.box {
-    background: white;
-    padding: 20px;
-    border-radius: 20px;
-    max-width: 500px;
-    margin: auto;
-    box-shadow: 0 0 20px rgba(0,0,0,0.1);
+    padding: 30px 20px;
 }
 
 /* fox */
 .fox {
-    width: 120px;
-    animation: float 3s ease-in-out infinite;
+    width: 130px;
+    filter: drop-shadow(0 0 20px rgba(255,255,255,0.2));
+    animation: float 4s ease-in-out infinite;
 }
 
-/* butterfly */
+@keyframes float {
+    0%,100%{transform:translateY(0);}
+    50%{transform:translateY(-12px);}
+}
+
+/* title */
+.title {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    margin: 20px 0;
+    opacity: 0.9;
+}
+
+/* message card */
+.card {
+    max-width: 600px;
+    margin: auto;
+    padding: 25px;
+    border-radius: 20px;
+    background: rgba(255,255,255,0.06);
+    backdrop-filter: blur(18px);
+    border: 1px solid rgba(255,255,255,0.1);
+    line-height: 1.9;
+    font-size: 1rem;
+}
+
+/* hearts */
+.heart {
+    position: absolute;
+    font-size: 26px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.heart:hover {
+    transform: scale(1.3);
+}
+
+/* hidden msg */
+#secret {
+    display: none;
+    margin-top: 25px;
+    padding: 20px;
+    border-radius: 15px;
+    background: rgba(255,182,193,0.15);
+}
+
+/* butterflies */
 .butterfly {
     position: fixed;
-    width: 40px;
-    animation: fly 10s linear infinite;
+    width: 35px;
+    opacity: 0.6;
+    animation: fly 18s linear infinite;
 }
 
 @keyframes fly {
@@ -67,84 +148,67 @@ button {
     to {transform: translateX(110vw);}
 }
 
-/* floating animation */
-@keyframes float {
-    0%,100%{transform:translateY(0);}
-    50%{transform:translateY(-10px);}
-}
-
-/* hearts */
-.heart {
-    position: absolute;
-    font-size: 30px;
-}
-
 /* particles */
-.sparkle {
+.particle {
     position: fixed;
-    color: white;
-    animation: sparkle 3s infinite;
-}
-@keyframes sparkle {
-    0%{opacity:0;}
-    50%{opacity:1;}
-    100%{opacity:0;}
-}
-
-/* hidden msg */
-#secretMsg {
-    display: none;
-    color: #ff66a3;
-    margin-top: 20px;
+    width: 3px;
+    height: 3px;
+    background: white;
+    border-radius: 50%;
+    opacity: 0.3;
+    animation: rise 12s linear infinite;
 }
 
-/* typing effect */
-#typedText {
-    font-family: 'Pacifico', cursive;
-    color: #ff6699;
+@keyframes rise {
+    from {transform: translateY(100vh);}
+    to {transform: translateY(-10vh);}
+}
+
+/* music button */
+.music {
+    position: fixed;
+    top: 15px;
+    right: 15px;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.2);
+    padding: 10px 14px;
+    border-radius: 50%;
+    cursor: pointer;
 }
 </style>
 </head>
 
 <body>
 
-<audio id="music" loop>
+<audio id="song" loop>
   <source src="song.mp3">
 </audio>
 
+<!-- LANDING -->
 <div id="landing">
-    <h1>Hey you 🦊🦋</h1>
-    <button onclick="start()">Enter 💖</button>
+    <h1>FOR YOU</h1>
+    <button class="enter-btn" onclick="start()">Enter 💖</button>
 </div>
 
+<!-- MAIN -->
 <div id="main">
 
-<button onclick="playMusic()">🎵 Play Music</button>
+<button class="music" onclick="document.getElementById('song').play()">🎵</button>
 
 <img class="fox" src="https://cdn-icons-png.flaticon.com/512/616/616554.png">
 
-<h2 id="typedText"></h2>
+<div class="title">My Love</div>
 
-<div class="box">
-<p>
-Thank you for being mine.. 💖<br>
-I'll be rooting for you in every lifetime..<br>
-I'm sooo proud proud of you chuti bba 🥺
-</p>
-
-<p>
-You are my safe place, my happiness 🌸<br>
-I'd find you in every universe 🦋
-</p>
-
-<p>I love youuu 💕</p>
-
-<b>— from your jandi 💌</b>
+<div class="card">
+    Thank you for being mine.. 💖<br><br>
+    I'll be rooting for you in every lifetime..<br>
+    I'm so proud of you, always.<br><br>
+    You feel like home in every universe 🦋<br><br>
+    I love you endlessly.
 </div>
 
-<h3>Tap hearts 💖</h3>
-<div id="secretMsg">
-lets go bingchun soon and play mortal combat 💕
+<div id="secret">
+    lets go bingchun soon and play mortal combat 💕
 </div>
 
 </div>
@@ -154,55 +218,16 @@ lets go bingchun soon and play mortal combat 💕
 function start(){
     document.getElementById("landing").style.display="none";
     document.getElementById("main").style.display="block";
-    typing();
+
+    spawnHearts();
     butterflies();
-    sparkles();
-    heartsGame();
-}
-
-function playMusic(){
-    document.getElementById("music").play();
-}
-
-/* typing */
-let text="My Love 💌";
-let i=0;
-function typing(){
-    if(i<text.length){
-        document.getElementById("typedText").innerHTML += text.charAt(i);
-        i++;
-        setTimeout(typing,100);
-    }
-}
-
-/* butterflies */
-function butterflies(){
-    setInterval(()=>{
-        let b=document.createElement("img");
-        b.src="https://cdn-icons-png.flaticon.com/512/616/616490.png";
-        b.className="butterfly";
-        b.style.top=Math.random()*80+"vh";
-        document.body.appendChild(b);
-        setTimeout(()=>b.remove(),10000);
-    },2000);
-}
-
-/* sparkles */
-function sparkles(){
-    setInterval(()=>{
-        let s=document.createElement("div");
-        s.className="sparkle";
-        s.innerHTML="✨";
-        s.style.left=Math.random()*100+"vw";
-        s.style.top=Math.random()*100+"vh";
-        document.body.appendChild(s);
-        setTimeout(()=>s.remove(),3000);
-    },300);
+    particles();
 }
 
 /* hearts game */
 let count=0;
-function heartsGame(){
+
+function spawnHearts(){
     setInterval(()=>{
         let h=document.createElement("div");
         h.className="heart";
@@ -214,13 +239,37 @@ function heartsGame(){
             h.remove();
             count++;
             if(count>=5){
-                document.getElementById("secretMsg").style.display="block";
+                document.getElementById("secret").style.display="block";
             }
         };
 
         document.body.appendChild(h);
-        setTimeout(()=>h.remove(),4000);
-    },800);
+
+        setTimeout(()=>h.remove(),5000);
+    },900);
+}
+
+/* butterflies */
+function butterflies(){
+    setInterval(()=>{
+        let b=document.createElement("img");
+        b.src="https://cdn-icons-png.flaticon.com/512/616/616490.png";
+        b.className="butterfly";
+        b.style.top=Math.random()*80+"vh";
+        document.body.appendChild(b);
+        setTimeout(()=>b.remove(),18000);
+    },3000);
+}
+
+/* particles */
+function particles(){
+    for(let i=0;i<25;i++){
+        let p=document.createElement("div");
+        p.className="particle";
+        p.style.left=Math.random()*100+"vw";
+        p.style.animationDuration=(8+Math.random()*5)+"s";
+        document.body.appendChild(p);
+    }
 }
 
 </script>
