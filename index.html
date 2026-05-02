@@ -2,185 +2,227 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>For You 💖</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Quicksand&family=Pacifico&display=swap" rel="stylesheet">
 
 <style>
 body {
     margin: 0;
-    font-family: 'Segoe UI', sans-serif;
+    font-family: 'Quicksand', sans-serif;
     background: linear-gradient(135deg, #e6fff2, #ffe6f2, #e6f0ff);
-    overflow: hidden;
+    overflow-x: hidden;
     text-align: center;
 }
 
-/* Landing Page */
+/* landing */
 #landing {
     height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
-    background: radial-gradient(circle, #ffffff, #e6fff2, #ffe6f2);
 }
 
-#landing h1 {
-    color: #ff66a3;
-    font-size: 2.5em;
-}
-
-.enter-btn {
-    margin-top: 20px;
-    padding: 12px 25px;
-    border: none;
+button {
+    padding: 12px 20px;
     border-radius: 25px;
+    border: none;
     background: #ff99cc;
     color: white;
     font-size: 16px;
-    cursor: pointer;
-    transition: 0.3s;
 }
 
-.enter-btn:hover {
-    background: #ff66a3;
-    transform: scale(1.05);
-}
-
-/* Main Page */
+/* main */
 #main {
     display: none;
-    padding: 40px;
+    padding: 20px;
 }
 
 .box {
     background: white;
-    padding: 25px;
-    margin: auto;
-    width: 70%;
+    padding: 20px;
     border-radius: 20px;
+    max-width: 500px;
+    margin: auto;
     box-shadow: 0 0 20px rgba(0,0,0,0.1);
 }
 
-h2 {
-    color: #ff6699;
+/* fox */
+.fox {
+    width: 120px;
+    animation: float 3s ease-in-out infinite;
 }
 
-/* floating hearts */
-.heart {
+/* butterfly */
+.butterfly {
     position: fixed;
-    bottom: -10px;
-    color: pink;
-    animation: rise 6s linear infinite;
+    width: 40px;
+    animation: fly 10s linear infinite;
 }
 
-@keyframes rise {
-    0% { transform: translateY(0); opacity: 1; }
-    100% { transform: translateY(-800px); opacity: 0; }
+@keyframes fly {
+    from {transform: translateX(-10vw);}
+    to {transform: translateX(110vw);}
 }
 
-/* sparkles */
+/* floating animation */
+@keyframes float {
+    0%,100%{transform:translateY(0);}
+    50%{transform:translateY(-10px);}
+}
+
+/* hearts */
+.heart {
+    position: absolute;
+    font-size: 30px;
+}
+
+/* particles */
 .sparkle {
     position: fixed;
-    color: #fff;
-    animation: sparkle 3s linear infinite;
+    color: white;
+    animation: sparkle 3s infinite;
 }
-
 @keyframes sparkle {
-    0% { opacity: 0; transform: scale(0.5);}
-    50% { opacity: 1; }
-    100% { opacity: 0; transform: scale(1.5);}
+    0%{opacity:0;}
+    50%{opacity:1;}
+    100%{opacity:0;}
 }
 
-/* hidden message */
-.secret {
-    color: transparent;
+/* hidden msg */
+#secretMsg {
+    display: none;
+    color: #ff66a3;
+    margin-top: 20px;
 }
-.secret:hover {
-    color: #ff99cc;
+
+/* typing effect */
+#typedText {
+    font-family: 'Pacifico', cursive;
+    color: #ff6699;
 }
 </style>
 </head>
 
 <body>
 
-<!-- MUSIC -->
 <audio id="music" loop>
-  <source src="https://cdn.pixabay.com/audio/2022/03/15/audio_115b9b3f9c.mp3" type="audio/mpeg">
+  <source src="song.mp3">
 </audio>
 
-<!-- LANDING PAGE -->
 <div id="landing">
     <h1>Hey you 🦊🦋</h1>
-    <p>Click to enter your little world ✨</p>
-    <button class="enter-btn" onclick="enterPage()">Enter 💖</button>
+    <button onclick="start()">Enter 💖</button>
 </div>
 
-<!-- MAIN PAGE -->
 <div id="main">
-    <h2>My Love 💌</h2>
 
-    <div class="box">
-        <p>
-            Thank you for being mine..  
-            I’ll be rooting for you in every lifetime..  
-            I’m sooo proud proud of you chuti bba 🥺💖
-        </p>
+<button onclick="playMusic()">🎵 Play Music</button>
 
-        <p>
-            You are my safe place, my happiness,  
-            and my favorite person in every universe 🌸
-        </p>
+<img class="fox" src="https://cdn-icons-png.flaticon.com/512/616/616554.png">
 
-        <p>
-            Even in another life, I’d still find you 🦋  
-        </p>
+<h2 id="typedText"></h2>
 
-        <p>
-            I love youuuuu 💕  
-        </p>
+<div class="box">
+<p>
+Thank you for being mine.. 💖<br>
+I'll be rooting for you in every lifetime..<br>
+I'm sooo proud proud of you chuti bba 🥺
+</p>
 
-        <p><b>— from your jandi 💌</b></p>
-    </div>
+<p>
+You are my safe place, my happiness 🌸<br>
+I'd find you in every universe 🦋
+</p>
 
-    <p class="secret">lets go bingchun soon and play mortal combat.</p>
+<p>I love youuu 💕</p>
+
+<b>— from your jandi 💌</b>
+</div>
+
+<h3>Tap hearts 💖</h3>
+<div id="secretMsg">
+lets go bingchun soon and play mortal combat 💕
+</div>
+
 </div>
 
 <script>
-function enterPage() {
-    document.getElementById("landing").style.display = "none";
-    document.getElementById("main").style.display = "block";
 
-    // play music after click (browser rule)
+function start(){
+    document.getElementById("landing").style.display="none";
+    document.getElementById("main").style.display="block";
+    typing();
+    butterflies();
+    sparkles();
+    heartsGame();
+}
+
+function playMusic(){
     document.getElementById("music").play();
 }
 
-// floating hearts
-function createHeart() {
-    const heart = document.createElement("div");
-    heart.classList.add("heart");
-    heart.innerHTML = "💖";
-    heart.style.left = Math.random() * 100 + "vw";
-    document.body.appendChild(heart);
-
-    setTimeout(() => {
-        heart.remove();
-    }, 6000);
+/* typing */
+let text="My Love 💌";
+let i=0;
+function typing(){
+    if(i<text.length){
+        document.getElementById("typedText").innerHTML += text.charAt(i);
+        i++;
+        setTimeout(typing,100);
+    }
 }
-setInterval(createHeart, 500);
 
-// sparkles
-function createSparkle() {
-    const s = document.createElement("div");
-    s.classList.add("sparkle");
-    s.innerHTML = "✨";
-    s.style.left = Math.random() * 100 + "vw";
-    s.style.top = Math.random() * 100 + "vh";
-    document.body.appendChild(s);
-
-    setTimeout(() => {
-        s.remove();
-    }, 3000);
+/* butterflies */
+function butterflies(){
+    setInterval(()=>{
+        let b=document.createElement("img");
+        b.src="https://cdn-icons-png.flaticon.com/512/616/616490.png";
+        b.className="butterfly";
+        b.style.top=Math.random()*80+"vh";
+        document.body.appendChild(b);
+        setTimeout(()=>b.remove(),10000);
+    },2000);
 }
-setInterval(createSparkle, 400);
+
+/* sparkles */
+function sparkles(){
+    setInterval(()=>{
+        let s=document.createElement("div");
+        s.className="sparkle";
+        s.innerHTML="✨";
+        s.style.left=Math.random()*100+"vw";
+        s.style.top=Math.random()*100+"vh";
+        document.body.appendChild(s);
+        setTimeout(()=>s.remove(),3000);
+    },300);
+}
+
+/* hearts game */
+let count=0;
+function heartsGame(){
+    setInterval(()=>{
+        let h=document.createElement("div");
+        h.className="heart";
+        h.innerHTML="💖";
+        h.style.left=Math.random()*90+"vw";
+        h.style.top=Math.random()*80+"vh";
+
+        h.onclick=()=>{
+            h.remove();
+            count++;
+            if(count>=5){
+                document.getElementById("secretMsg").style.display="block";
+            }
+        };
+
+        document.body.appendChild(h);
+        setTimeout(()=>h.remove(),4000);
+    },800);
+}
+
 </script>
 
 </body>
