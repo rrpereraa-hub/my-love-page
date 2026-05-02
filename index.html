@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>For My Love 💖</title>
+
+<style>
+    body {
+        margin: 0;
+        font-family: 'Comic Sans MS', cursive;
+        text-align: center;
+        background: linear-gradient(135deg, #e6fff2, #ffe6f2, #e6f0ff);
+        overflow-x: hidden;
+    }
+
+    h1 {
+        color: #ff6699;
+        margin-top: 40px;
+    }
+
+    .box {
+        background: white;
+        padding: 25px;
+        margin: 30px auto;
+        width: 70%;
+        border-radius: 20px;
+        box-shadow: 0 0 15px rgba(0,0,0,0.1);
+    }
+
+    .emoji {
+        font-size: 50px;
+        animation: float 3s ease-in-out infinite;
+    }
+
+    @keyframes float {
+        0% { transform: translateY(0px); }
+        50% { transform: translateY(-10px); }
+        100% { transform: translateY(0px); }
+    }
+
+    .footer {
+        margin-top: 40px;
+        font-size: 14px;
+        color: #999;
+    }
+
+    /* floating hearts */
+    .heart {
+        position: fixed;
+        bottom: -10px;
+        color: pink;
+        animation: rise 6s linear infinite;
+    }
+
+    @keyframes rise {
+        0% { transform: translateY(0); opacity: 1; }
+        100% { transform: translateY(-800px); opacity: 0; }
+    }
+
+    /* hidden message */
+    .secret {
+        color: transparent;
+        user-select: none;
+    }
+
+    .secret:hover {
+        color: #ff99cc;
+    }
+</style>
+
+</head>
+
+<body>
+
+<!-- Background Music -->
+<iframe width="0" height="0" src="https://www.youtube.com/embed/79c2pSvz8IE?autoplay=1&loop=1&playlist=79c2pSvz8IE" frameborder="0" allow="autoplay"></iframe>
+
+<h1>Hey My Love 🦊🦋</h1>
+
+<div class="emoji">🦊 🦋</div>
+
+<div class="box">
+    <p>
+        I made this little magical space just for you ✨  
+        Like a tiny world where it's only us.
+    </p>
+
+    <p>
+        Thank you for being mine..  
+        I'll be rooting for you in every lifetime..  
+        and I'm sooo proud proud of you chuti bba 🥺💖  
+    </p>
+
+    <p>
+        You make everything softer, warmer, and happier.  
+        Even the quiet moments feel special with you.
+    </p>
+
+    <p>
+        If I could, I’d choose you again and again—  
+        in every universe, every timeline, every story 🌸
+    </p>
+
+    <p>
+        I love youuuuu 💕  
+    </p>
+
+    <p><b>— from your jandi 💌</b></p>
+</div>
+
+<div class="emoji">🌸 💕 🌼</div>
+
+<!-- Hidden Message -->
+<p class="secret">
+    lets go bingchun soon and play mortal combat.
+</p>
+
+<div class="footer">
+    (hover around... there might be secrets 👀)
+</div>
+
+<!-- floating hearts script -->
+<script>
+function createHeart() {
+    const heart = document.createElement("div");
+    heart.classList.add("heart");
+    heart.innerHTML = "💖";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.fontSize = Math.random() * 20 + 10 + "px";
+    document.body.appendChild(heart);
+
+    setTimeout(() => {
+        heart.remove();
+    }, 6000);
+}
+
+setInterval(createHeart, 500);
+</script>
+
+</body>
+</html>
